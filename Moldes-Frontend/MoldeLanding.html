@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Molde Landing Page - Banco (Prototipo Penpot)</title>
+  <style>
+    /* ==========================================================================
+       RESET Y ESTILOS BASE - MOLDE WIREFRAME (PENPOT 1:1)
+       ========================================================================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: #f7f9fa;
+      color: #000000;
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Lienzo principal basado en el Frame de Penpot (1920px de ancho) */
+    .penpot-canvas {
+      width: 100%;
+      max-width: 1920px;
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 38px;
+      padding: 20px 60px 40px 60px;
+      border: 1px dashed #d1d5db; /* Delimitador suave del canvas 1920px */
+      position: relative;
+    }
+
+    /* ==========================================================================
+       ESTRUCTURA DE ENCAPSULACIÓN POR SECCIONES
+       ========================================================================== */
+    .seccion-encapsulada {
+      width: 100%;
+      max-width: 1815px;
+      border: 1px solid #000000;
+      background-color: #ffffff;
+      padding: 16px 8px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    /* Etiqueta indicadora de sección estilo Penpot */
+    .seccion-tag {
+      position: absolute;
+      top: -12px;
+      left: 14px;
+      background: #000000;
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      padding: 2px 10px;
+      border-radius: 2px;
+      text-transform: uppercase;
+      z-index: 10;
+    }
+
+    /* ==========================================================================
+       BARRA PRINCIPAL (HEADER / NAVBAR)
+       Proporciones Penpot: Ancho 1800px, Alto 100px - 125px
+       Elementos: 6 bloques de 250px x 75px
+       ========================================================================== */
+    .barra-principal {
+      width: 100%;
+      max-width: 1800px;
+      min-height: 125px;
+      border: 1px solid #000000;
+      background-color: #ffffff;
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+      position: relative;
+    }
+
+    .nav-inner-container {
+      width: 100%;
+      min-height: 100px;
+      border: 1px solid #000000;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0 16px;
+      gap: 10px;
+      position: relative;
+    }
+
+    .nav-box {
+      width: 250px;
+      height: 75px;
+      border: 1px solid #000000;
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 4px;
+      flex-shrink: 0;
+    }
+
+    .nav-box.logo {
+      margin-right: 140px; /* Separación entre Logo y Menú de navegación */
+      background: #fafafa;
+    }
+
+    .nav-box.cta {
+      margin-left: auto; /* Empuja el botón de Banca por Internet a la derecha */
+      border-width: 2px;
+      background: #fdfdfd;
+    }
+
+    .box-sublabel {
+      font-size: 10px;
+      font-weight: 400;
+      color: #666666;
+      margin-top: 2px;
+    }
+
+    /* ==========================================================================
+       TÍTULOS DE SECCIÓN
+       Proporciones Penpot: Ancho 600px, Alto 75px
+       ========================================================================== */
+    .titulo-bloque {
+      width: 600px;
+      height: 75px;
+      border: 1px solid #000000;
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 700;
+      padding: 8px;
+    }
+
+    .titulo-centrado {
+      margin: 0 auto;
+    }
+
+    .titulo-izq {
+      margin: 0 0 0 8px;
+      align-items: flex-start;
+      padding-left: 20px;
+    }
+
+    /* ==========================================================================
+       SECCION 1: HERO / BANNER PRINCIPAL
+       Proporciones Penpot: 
+       - Título Centrado: 600px x 75px
+       - Banner Principal: 1800px x 500px
+       ========================================================================== */
+    .seccion-1 .hero-banner {
+      width: 100%;
+      max-width: 1800px;
+      height: 500px;
+      margin: 0 auto;
+      border: 1px solid #000000;
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 18px;
+      font-weight: 600;
+      padding: 20px;
+    }
+
+    /* ==========================================================================
+       SECCION 2: PRODUCTOS PRINCIPALES (TARJETAS GRANDES)
+       Proporciones Penpot:
+       - Título Centrado: 600px x 75px
+       - 4 Tarjetas: 425px x 600px (Gap ~31px - 38px)
+       ========================================================================== */
+    .grid-4-tall {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 1800px;
+      margin: 0 auto;
+      gap: 31px;
+    }
+
+    .card-tall {
+      width: 425px;
+      height: 600px;
+      border: 1px solid #000000;
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 16px;
+      flex: 1;
+    }
+
+    /* ==========================================================================
+       SECCIONES 3, 4 Y 5: TARJETAS MEDIANAS
+       Proporciones Penpot:
+       - 4 Tarjetas: 425px x 300px (Gap ~31px - 38px)
+       - Sección 3 y 4: Título alineado a la izquierda (600px x 75px)
+       - Sección 5: Título centrado (600px x 75px)
+       ========================================================================== */
+    .grid-4-medium {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 1800px;
+      margin: 0 auto;
+      gap: 31px;
+    }
+
+    .card-medium {
+      width: 425px;
+      height: 300px;
+      border: 1px solid #000000;
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 14px;
+      flex: 1;
+    }
+
+    /* ==========================================================================
+       SECCION 6: FOOTER / PIE DE PÁGINA INSTITUCIONAL
+       Proporciones Penpot:
+       - Bloque Principal: 1800px x 885px
+       - Sub-bloque Legal/Copyright: 1600px x 200px (Centrado)
+       ========================================================================== */
+    .seccion-6 .footer-principal {
+      width: 100%;
+      max-width: 1800px;
+      height: 885px;
+      margin: 0 auto;
+      border: 1px solid #000000;
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .footer-contenido {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-start;
+      margin-top: 40px;
+      text-align: center;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .seccion-6 .footer-subbloque {
+      width: 100%;
+      max-width: 1600px;
+      height: 200px;
+      border: 1px solid #000000;
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 16px;
+    }
+
+    /* Estilo de texto auxiliar para wireframes */
+    .wireframe-dim {
+      font-family: monospace;
+      font-size: 11px;
+      color: #888888;
+      margin-top: 4px;
+    }
+
+    /* Adaptabilidad básica preservando escala */
+    @media (max-width: 1850px) {
+      .penpot-canvas {
+        padding: 20px 20px;
+      }
+      .grid-4-tall, .grid-4-medium {
+        gap: 16px;
+      }
+      .nav-box.logo {
+        margin-right: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================================
+       CANVAS PRINCIPAL (1920px x 4080px aprox en Penpot)
+       ======================================================================== -->
+  <main class="penpot-canvas">
+
+    <!-- ======================================================================
+         BARRA PRINCIPAL (HEADER / NAVBAR)
+         Penpot: 1800px x 125px | 6 Elementos de 250px x 75px
+         ====================================================================== -->
+    <header class="seccion-encapsulada barra-principal">
+      <span class="seccion-tag">BARRA PRINCIPAL (1800 x 125)</span>
+      <div class="nav-inner-container">
+        
+        <!-- Elemento 1: Logo / Marca (BankCruz) -->
+        <div class="nav-box logo">
+          <strong>LOGO INSTITUCIONAL</strong>
+          <span class="box-sublabel">CruzBank / Banco</span>
+          <span class="wireframe-dim">250 x 75 px</span>
+        </div>
+
+        <!-- Elemento 2: Navegación Personas -->
+        <div class="nav-box">
+          <strong>PERSONAS</strong>
+          <span class="box-sublabel">Cuentas, Tarjetas, Créditos</span>
+          <span class="wireframe-dim">250 x 75 px</span>
+        </div>
+
+        <!-- Elemento 3: Navegación Empresas / Negocios -->
+        <div class="nav-box">
+          <strong>EMPRESAS / PYMES</strong>
+          <span class="box-sublabel">Comercio, Pagos, DPFs</span>
+          <span class="wireframe-dim">250 x 75 px</span>
+        </div>
+
+        <!-- Elemento 4: Canales Digitales / Servicios -->
+        <div class="nav-box">
+          <strong>CANALES DIGITALES</strong>
+          <span class="box-sublabel">App Móvil, QR, Cobros</span>
+          <span class="wireframe-dim">250 x 75 px</span>
+        </div>
+
+        <!-- Elemento 5: Atención al Cliente / Puntos de Contacto -->
+        <div class="nav-box">
+          <strong>ATENCIÓN AL CLIENTE</strong>
+          <span class="box-sublabel">Agencias, Cajeros, Ayuda</span>
+          <span class="wireframe-dim">250 x 75 px</span>
+        </div>
+
+        <!-- Elemento 6: Botón CTA / Banca por Internet (GanaNet / SolNet / BNB Móvil) -->
+        <div class="nav-box cta">
+          <strong>BANCA POR INTERNET</strong>
+          <span class="box-sublabel">Acceso seguro / Login</span>
+          <span class="wireframe-dim">250 x 75 px</span>
+        </div>
+
+      </div>
+    </header>
+
+
+    <!-- ======================================================================
+         SECCION 1: BANNER PRINCIPAL / HERO SLIDER
+         Penpot: Título 600x75 (Centrado) + Banner 1800x500
+         ====================================================================== -->
+    <section class="seccion-encapsulada seccion-1">
+      <span class="seccion-tag">SECCION 1 (1815 x 620)</span>
+      
+      <!-- Título de Sección (Centrado) -->
+      <div class="titulo-bloque titulo-centrado">
+        <h2>TÍTULO PRINCIPAL DE CAMPAÑA / BANNER</h2>
+        <span class="box-sublabel">Ej. Campaña GanaDoble, Ahorros con Sorteos o Crédito Fácil</span>
+        <span class="wireframe-dim">600 x 75 px</span>
+      </div>
+
+      <!-- Banner / Carrusel Hero -->
+      <div class="hero-banner">
+        <h3>CONTENEDOR DE BANNER PRINCIPAL / HERO CAROUSEL</h3>
+        <p class="box-sublabel">Espacio para slider de promociones, tasas preferenciales, llamadas a la acción (CTA) y novedades del banco.</p>
+        <span class="wireframe-dim">1800 x 500 px</span>
+      </div>
+    </section>
+
+
+    <!-- ======================================================================
+         SECCION 2: PRODUCTOS PRINCIPALES DESTACADOS (TARJETAS GRANDES)
+         Penpot: Título 600x75 (Centrado) + 4 Tarjetas 425x600
+         ====================================================================== -->
+    <section class="seccion-encapsulada seccion-2">
+      <span class="seccion-tag">SECCION 2 (1815 x 775)</span>
+
+      <!-- Título de Sección (Centrado) -->
+      <div class="titulo-bloque titulo-centrado">
+        <h2>PRODUCTOS DESTACADOS</h2>
+        <span class="box-sublabel">Soluciones financieras más demandadas para personas y negocios</span>
+        <span class="wireframe-dim">600 x 75 px</span>
+      </div>
+
+      <!-- Grid de 4 Tarjetas Altas -->
+      <div class="grid-4-tall">
+        
+        <!-- Tarjeta 1: Cuentas de Ahorro -->
+        <article class="card-tall">
+          <h3>CUENTAS DE AHORRO</h3>
+          <p class="box-sublabel">Apertura 100% digital, sin monto mínimo y con disponibilidad inmediata.</p>
+          <span class="wireframe-dim">425 x 600 px</span>
+        </article>
+
+        <!-- Tarjeta 2: Tarjetas de Débito y Crédito -->
+        <article class="card-tall">
+          <h3>TARJETAS DE CRÉDITO & DÉBITO</h3>
+          <p class="box-sublabel">Compras por internet habilitadas, tecnología Contactless y beneficios en compras.</p>
+          <span class="wireframe-dim">425 x 600 px</span>
+        </article>
+
+        <!-- Tarjeta 3: Créditos y Préstamos -->
+        <article class="card-tall">
+          <h3>CRÉDITOS Y PRÉSTAMOS</h3>
+          <p class="box-sublabel">Vivienda, vehicular y consumo con tasas competitivas y desembolso ágil.</p>
+          <span class="wireframe-dim">425 x 600 px</span>
+        </article>
+
+        <!-- Tarjeta 4: Inversiones y DPF -->
+        <article class="card-tall">
+          <h3>DPF & INVERSIONES</h3>
+          <p class="box-sublabel">Rendimientos garantizados con plazos flexibles y tasas de interés atractivas.</p>
+          <span class="wireframe-dim">425 x 600 px</span>
+        </article>
+
+      </div>
+    </section>
+
+
+    <!-- ======================================================================
+         SECCION 3: CANALES DIGITALES / SERVICIOS RÁPIDOS
+         Penpot: Título 600x75 (Alineado Izquierda) + 4 Tarjetas 425x300
+         ====================================================================== -->
+    <section class="seccion-encapsulada seccion-3">
+      <span class="seccion-tag">SECCION 3 (1815 x 453)</span>
+
+      <!-- Título de Sección (Izquierda) -->
+      <div class="titulo-bloque titulo-izq">
+        <h2>BANCA DIGITAL Y CANALES</h2>
+        <span class="box-sublabel">Operaciones 24/7 sin filas ni demoras</span>
+        <span class="wireframe-dim">600 x 75 px</span>
+      </div>
+
+      <!-- Grid de 4 Tarjetas Medianas -->
+      <div class="grid-4-medium">
+        
+        <article class="card-medium">
+          <h3>APP BANCA MÓVIL</h3>
+          <p class="box-sublabel">Control total de cuentas desde tu smartphone.</p>
+          <span class="wireframe-dim">425 x 300 px</span>
+        </article>
+
+        <article class="card-medium">
+          <h3>COBROS Y PAGOS QR</h3>
+          <p class="box-sublabel">Transferencias simples e instantáneas con QR Simple.</p>
+          <span class="wireframe-dim">425 x 300 px</span>
+        </article>
+
+        <article class="card-medium">
+          <h3>PAGOS DE SERVICIOS</h3>
+          <p class="box-sublabel">Luz, agua, telefonía, colegiaturas e impuestos.</p>
+          <span class="wireframe-dim">425 x 300 px</span>
+        </article>
+
+        <article class="card-medium">
+          <h3>TRANSFERENCIAS ACH</h3>
+          <p class="box-sublabel">Envíos interbancarios a todo el país al instante.</p>
+          <span class="wireframe-dim">425 x 300 px</span>
+        </article>
+
+      </div>
+    </section>
+
+
+    <!-- ======================================================================
+         SECCION 4: HERRAMIENTAS Y ASISTENCIA FINANCIERA
+         Penpot: Título 600x75 (Alineado Izquierda) + 4 Tarjetas 425x300
+         ====================================================================== -->
+    <section class="seccion-encapsulada seccion-4">
+      <span class="seccion-tag">SECCION 4 (1815 x 453)</span>
+
+      <!-- Título de Sección (Izquierda) -->
+      <div class="titulo-bloque titulo-izq">
+        <h2>HERRAMIENTAS FINANCIERAS</h2>
+        <span class="box-sublabel">Calculadoras y utilidades para tu planificación</span>
+        <span class="wireframe-dim">600 x 75 px</span>
+      </div>
+
+      <!-- Grid de 4 Tarjetas Medianas -->
+      <div class="grid-4-medium">
+        
+        <article class="card-medium">
+          <h3>SIMULADOR DE CRÉDITOS</h3>
+          <p class="box-sublabel">Calcula tus cuotas mensuales y plan de amortización.</p>
+          <span class="wireframe-dim">425 x 300 px</span>
+        </article>
+
+        <article class="card-medium">
+          <h3>TIPO DE CAMBIO</h3>
+          <p class="box-sublabel">Cotización oficial de divisas USD / BOB en tiempo real.</p>
+          <span class="wireframe-dim">425 x 300 px</span>
+        </article>
+
+        <article class="card-medium">
+          <h3>SIMULADOR DPF</h3>
+          <p class="box-sublabel">Proyecta los intereses y ganancias de tus depósitos.</p>
+          <span class="wireframe-dim">425 x 300 px</span>
+        </article>
+
+        <article class="card-medium">
+          <h3>PUNTOS DE ATENCIÓN</h3>
+          <p class="box-sublabel">Geolocalización de cajeros automáticos y agencias.</p>
+          <span class="wireframe-dim">425 x 300 px</span>
+        </article>
+
+      </div>
+    </section>
+
+
+    <!-- ======================================================================
+         SECCION 5: PROMOCIONES Y BENEFICIOS EXCLUSIVOS
+         Penpot: Título 600x75 (Centrado) + 4 Tarjetas 425x300
+         ====================================================================== -->
+    <section class="seccion-encapsulada seccion-5">
+      <span class="seccion-tag">SECCION 5 (1815 x 453)</span>
+
+      <!-- Título de Sección (Centrado) -->
+      <div class="titulo-bloque titulo-centrado">
+        <h2>BENEFICIOS Y PROMOCIONES</h2>
+        <span class="box-sublabel">Descuentos y recompensas por ser cliente del banco</span>
+        <span class="wireframe-dim">600 x 75 px</span>
+      </div>
+
+      <!-- Grid de 4 Tarjetas Medianas -->
+      <div class="grid-4-medium">
+        
+        <article class="card-medium">
+          <h3>CLUB DE DESCUENTOS</h3>
+          <p class="box-sublabel">Hasta 30% de descuento en restaurantes, supermercados y farmacias.</p>
+          <span class="wireframe-dim">425 x 300 px</span>
+        </article>
+
+        <article class="card-medium">
+          <h3>PROGRAMA DE PUNTOS</h3>
+          <p class="box-sublabel">Acumula puntos por tus compras y canjéalos por premios y viajes.</p>
+          <span class="wireframe-dim">425 x 300 px</span>
+        </article>
+
+        <article class="card-medium">
+          <h3>SORTEOS Y CAMPAÑAS</h3>
+          <p class="box-sublabel">Participa en sorteos periódicos manteniendo tu saldo de ahorro.</p>
+          <span class="wireframe-dim">425 x 300 px</span>
+        </article>
+
+        <article class="card-medium">
+          <h3>EDUCACIÓN FINANCIERA</h3>
+          <p class="box-sublabel">Guías y tips para mejorar tus finanzas personales y empresariales.</p>
+          <span class="wireframe-dim">425 x 300 px</span>
+        </article>
+
+      </div>
+    </section>
+
+
+    <!-- ======================================================================
+         SECCION 6: FOOTER / PIE DE PÁGINA
+         Penpot: Contenedor Principal 1800x885 + Sub-bloque Legal/ASFI 1600x200
+         ====================================================================== -->
+    <footer class="seccion-encapsulada seccion-6">
+      <span class="seccion-tag">SECCION 6 - FOOTER (1815 x 912)</span>
+
+      <!-- Contenedor Principal del Footer -->
+      <div class="footer-principal">
+        
+        <!-- Bloque de Contenido / Columnas de Enlaces -->
+        <div class="footer-contenido">
+          <div>
+            <h4>SOBRE EL BANCO</h4>
+            <p class="box-sublabel">Quiénes somos</p>
+            <p class="box-sublabel">Gobierno Corporativo</p>
+            <p class="box-sublabel">Memorias y Balances</p>
+            <p class="box-sublabel">Trabaja con nosotros</p>
+          </div>
+          <div>
+            <h4>PRODUCTOS & SERVICIOS</h4>
+            <p class="box-sublabel">Cuentas y Depósitos</p>
+            <p class="box-sublabel">Tarjetas de Débito/Crédito</p>
+            <p class="box-sublabel">Créditos de Consumo e Hipotecario</p>
+            <p class="box-sublabel">Banca Seguros</p>
+          </div>
+          <div>
+            <h4>CANALES DE ATENCIÓN</h4>
+            <p class="box-sublabel">Contact Center: 800-10-XXXX</p>
+            <p class="box-sublabel">Red de Agencias Nacionales</p>
+            <p class="box-sublabel">Cajeros Automáticos</p>
+            <p class="box-sublabel">WhatsApp y Chatbot 24/7</p>
+          </div>
+          <div>
+            <h4>SEGURIDAD Y TRANSPARENCIA</h4>
+            <p class="box-sublabel">Consejos de Ciberseguridad</p>
+            <p class="box-sublabel">Tasas y Tarifarios Oficiales</p>
+            <p class="box-sublabel">Defensor del Cliente Financiero</p>
+            <p class="box-sublabel">Políticas de Privacidad</p>
+          </div>
+        </div>
+
+        <!-- Sub-bloque Legal / ASFI / Copyright (1600px x 200px) -->
+        <div class="footer-subbloque">
+          <strong>ENTIDAD FINANCIERA REGULADA POR ASFI</strong>
+          <span class="box-sublabel">Autoridad de Supervisión del Sistema Financiero de Bolivia</span>
+          <p class="box-sublabel" style="margin-top: 10px;">
+            © 2026 CruzBank S.A. Todos los derechos reservados. Prohibida su reproducción total o parcial sin autorización expresa.
+          </p>
+          <span class="wireframe-dim">1600 x 200 px</span>
+        </div>
+
+      </div>
+    </footer>
+
+  </main>
+
+</body>
+</html>
